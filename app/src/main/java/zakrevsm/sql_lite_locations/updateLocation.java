@@ -206,7 +206,7 @@ public class updateLocation extends AppCompatActivity implements
     }
 
 
-    public void printSQL(){
+    /*public void printSQL(){
         DBContract.SQLiteExample mSQLLiteExample = new DBContract.SQLiteExample(this);
         SQLiteDatabase mSQLDB = mSQLLiteExample.getWritableDatabase();
         Cursor mSQLCursor = mSQLDB.query(DBContract.DemoTable.TABLE_NAME,
@@ -225,7 +225,7 @@ public class updateLocation extends AppCompatActivity implements
 
         sqlList.setAdapter(mSQLCursorAdapter);
 
-    }
+    }*/
 
 
 

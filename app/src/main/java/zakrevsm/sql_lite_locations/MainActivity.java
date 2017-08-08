@@ -28,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        TextView sqlDisplay = (TextView) findViewById(R.id.Layout2);
+        sqlDisplay.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DisplaySQL.class);
+                startActivity(intent);
+            }
+        });
 
 
 
