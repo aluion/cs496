@@ -87,12 +87,12 @@ public class updateLocation extends AppCompatActivity implements
            Button mButton = (Button)findViewById(R.id.button2);
            final EditText mEdit = (EditText) findViewById(R.id.message);
 
-          /*  mButton.setOnClickListener(
+            mButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View view) {
                         Log.d("EditString", mEdit.getText().toString());
                     }
-                });*/
+                });
 
 
             mLocationListener = new LocationListener(){

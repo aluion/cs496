@@ -28,6 +28,10 @@
             android:name=".updateLocation"
             android:label="@string/title_activity_update_location"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DisplaySQL"
+            android:label="@string/title_activity_display_sql"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
