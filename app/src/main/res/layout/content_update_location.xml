@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:showIn="@layout/content_update_location">
+
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+     />
+
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/editText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="27dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginTop="50dp" />
+
+    <ListView
+        android:id="@+id/sql_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+    <TextView
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mLong"
+        android:layout_alignLeft="@+id/mLong"
+        android:layout_alignStart="@+id/mLong"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Current Location" />
+
+    <TextView
+        android:id="@+id/mLongText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:text="No Longitude available"
+        android:textSize="25sp"
+        android:layout_above="@+id/mLat"
+        android:layout_alignLeft="@+id/mLat"
+        android:layout_alignStart="@+id/mLat" />
+
+    <TextView
+        android:id="@+id/mLong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:text="Longitude:"
+        android:textSize="25sp"
+        android:layout_above="@+id/mLongText"
+        android:layout_alignLeft="@+id/mLongText"
+        android:layout_alignStart="@+id/mLongText" />
+
+    <TextView
+        android:id="@+id/mLatText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:text="No Latitude available"
+        android:textSize="25sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="23dp" />
+
+    <TextView
+        android:id="@+id/mLat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:clickable="true"
+        android:text="Latitude:"
+        android:textSize="25sp"
+        android:layout_above="@+id/mLatText"
+        android:layout_alignLeft="@+id/mLatText"
+        android:layout_alignStart="@+id/mLatText" />
+
+</RelativeLayout>
