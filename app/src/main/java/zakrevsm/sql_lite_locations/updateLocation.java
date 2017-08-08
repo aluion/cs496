@@ -96,9 +96,9 @@ public class updateLocation extends AppCompatActivity implements
 
 
             mLocationListener = new LocationListener(){
-                TextView LatText = (TextView) findViewById(R.id.mLatText);
-                TextView LongText = (TextView) findViewById(R.id.mLongText);
                 public void onLocationChanged(Location location) {
+                    TextView LatText = (TextView) findViewById(R.id.mLatText);
+                    TextView LongText = (TextView) findViewById(R.id.mLongText);
                     if (location != null) {
                         Log.d("sql test lat", "in on create new location found, updating");
                             updateLocation(location);
@@ -107,6 +107,7 @@ public class updateLocation extends AppCompatActivity implements
                     }
                 }
             };
+
 
         }
 
@@ -119,7 +120,10 @@ public class updateLocation extends AppCompatActivity implements
             runWithoutPermissions();
         }else {
             mGoogleClient.connect();
+
         }
+
+
     }
 
     //Display this if permissions are not set in the application
@@ -173,6 +177,7 @@ public class updateLocation extends AppCompatActivity implements
                 }else {
                     updateLocation(location);
                 }
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleClient,mLocationRequest,mLocationListener);
 
     }
 
