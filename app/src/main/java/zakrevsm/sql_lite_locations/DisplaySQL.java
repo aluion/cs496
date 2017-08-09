@@ -39,11 +39,10 @@ public class DisplaySQL extends AppCompatActivity {
                         DBContract.DemoTable.COLUMN_NAME_LOCATION_LAT, DBContract.DemoTable.COLUMN_NAME_LOCATION_LONG},
                 null, null, null, null, null);
 
-        Log.d ("SLL-onconnedted" ,
-                DatabaseUtils.dumpCursorToString(mSQLCursor));
+        
         results = new ArrayList();
-        //iterat over cursor, pull necessary data, concat, print to screen
-        //[]
+        //iterate over cursor, pull necessary data, concat, print to screen
+        //[1]
         if (mSQLCursor != null) {
             if (mSQLCursor.moveToFirst()) {
                 do {
@@ -51,36 +50,14 @@ public class DisplaySQL extends AppCompatActivity {
                             "string: " + mSQLCursor.getString(mSQLCursor.getColumnIndex("location_string")) + "\n"+
                             "Latitiude: " +  mSQLCursor.getString(mSQLCursor.getColumnIndex("location_lat")) + "\n" +
                             "Longtiude: " + mSQLCursor.getString(mSQLCursor.getColumnIndex("location_long"))  + "\n";
-                    Log.d ("SLL-onconnedted" ,
-                            res);
                     results.add(res);
                 } while (mSQLCursor.moveToNext());
             }
         }
 
-
-      /*  SimpleCursorAdapter mSQLCursorAdapter = new SimpleCursorAdapter(this, R.layout.content_display_sql,
-                mSQLCursor,
-                new String[]{DBContract.DemoTable._ID,
-                        DBContract.DemoTable.COLUMN_NAME_LOCATION_STRING,
-                        DBContract.DemoTable.COLUMN_NAME_LOCATION_LAT,
-                        DBContract.DemoTable.COLUMN_NAME_LOCATION_LONG},
-                        new int[]{R.id.sql_list_id, R.id.sql_list_string, R.id.sql_list_lat,R.id.sql_list_long},0);*/
         ArrayAdapter<String> newAdapter = new ArrayAdapter<String>(this, R.layout.activity_display_sql, results);
-         ListView sqlList = (ListView) findViewById(R.id.sql_list_view);
+        ListView sqlList = (ListView) findViewById(R.id.sql_list_view);
         sqlList.setAdapter(newAdapter);
-
-        //mSQLDB.execSQL(DBContract.DemoTable.SQL_CREATE_DEMO_TABLE);
-
-
-       /* ContentValues testValues = new ContentValues();
-        testValues.put(DBContract.DemoTable.COLUMN_NAME_LOCATION_LAT, "44.5");
-        testValues.put(DBContract.DemoTable.COLUMN_NAME_LOCATION_LONG, "-123.2");
-        testValues.put(DBContract.DemoTable.COLUMN_NAME_LOCATION_STRING, "Hello SQLite");
-        mSQLDB.insert(DBContract.DemoTable.TABLE_NAME, null, testValues);*/
-
-
-
     }
 
     @Override
@@ -88,3 +65,6 @@ public class DisplaySQL extends AppCompatActivity {
         super.onResume();
     }
 }
+
+//references
+//[1]:https://stackoverflow.com/questions/10723770/whats-the-best-way-to-iterate-an-android-cursor

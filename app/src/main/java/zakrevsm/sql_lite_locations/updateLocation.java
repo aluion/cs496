@@ -1,6 +1,7 @@
 package zakrevsm.sql_lite_locations;
 
 import android.*;
+import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -46,6 +47,22 @@ public class updateLocation extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_update_location);
 
+        //[1]:
+        Button mButton = (Button)findViewById(R.id.button2);
+        final EditText mEdit = (EditText) findViewById(R.id.message);
+        final TextView mLat = (TextView) findViewById(R.id.mLatText);
+        final TextView mLong = (TextView) findViewById(R.id.mLongText);
+        mButton.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick(View view) {
+                        Log.d("EditString", mEdit.getText().toString());
+
+                        addLocationToDatabase(mEdit.getText().toString(),
+                                mLat.getText().toString(),
+                                mLong.getText().toString());
+                    }
+                });
+
         //check for the permissions
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
@@ -60,11 +77,7 @@ public class updateLocation extends AppCompatActivity implements
         }else {
             Log.d("sql test lat", "permissions have been granted");
         }
-
-
-
-
-
+            //[2]:see references
             mLocationRequest = new LocationRequest();
             mLocationRequest.setInterval(10000);
             mLocationRequest.setFastestInterval(5000);
@@ -72,7 +85,7 @@ public class updateLocation extends AppCompatActivity implements
 
             LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                     .addLocationRequest(mLocationRequest);
-
+            //[2]
             mGoogleClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
@@ -80,21 +93,7 @@ public class updateLocation extends AppCompatActivity implements
                     .build();
             mGoogleClient.connect();
 
-            PendingResult<LocationSettingsResult> result =
-                    LocationServices.SettingsApi.checkLocationSettings(mGoogleClient, builder.build());//[1]
-
-            //create submit button listener[2]:
-           Button mButton = (Button)findViewById(R.id.button2);
-           final EditText mEdit = (EditText) findViewById(R.id.message);
-
-            mButton.setOnClickListener(
-                new View.OnClickListener(){
-                    public void onClick(View view) {
-                        Log.d("EditString", mEdit.getText().toString());
-                    }
-                });
-
-
+            //[3]
             mLocationListener = new LocationListener(){
                 public void onLocationChanged(Location location) {
                     TextView LatText = (TextView) findViewById(R.id.mLatText);
@@ -122,9 +121,8 @@ public class updateLocation extends AppCompatActivity implements
             mGoogleClient.connect();
 
         }
-
-
     }
+
 
     //Display this if permissions are not set in the application
     public void runWithoutPermissions(){
@@ -154,9 +152,11 @@ public class updateLocation extends AppCompatActivity implements
 
 
     @Override
+    //[3]
     public void onConnected(@Nullable Bundle bundle) {
         Log.d ("SLL-onconnedted" ,
                 "Connected to location services");
+        //[1]
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -204,39 +204,25 @@ public class updateLocation extends AppCompatActivity implements
         Log.d ("SLL-onconnedted" ,
                 "connection to location services failed");
     }
+    //[4]
+    public void addLocationToDatabase(String text, String lat, String lon) {
 
-
-    /*public void printSQL(){
         DBContract.SQLiteExample mSQLLiteExample = new DBContract.SQLiteExample(this);
         SQLiteDatabase mSQLDB = mSQLLiteExample.getWritableDatabase();
-        Cursor mSQLCursor = mSQLDB.query(DBContract.DemoTable.TABLE_NAME,
-                new String[]{DBContract.DemoTable._ID, DBContract.DemoTable.COLUMN_NAME_LOCATION_STRING,
-                        DBContract.DemoTable.COLUMN_NAME_LOCATION_LAT, DBContract.DemoTable.COLUMN_NAME_LOCATION_LONG},
-                null, null, null, null, null);
 
-        ListView sqlList = (ListView) findViewById(R.id.sql_list);
-        SimpleCursorAdapter mSQLCursorAdapter = new SimpleCursorAdapter(this, R.layout.activity_update_location,
-                                                mSQLCursor,
-                                                new String[]{DBContract.DemoTable.COLUMN_NAME_LOCATION_STRING,
-                                                    DBContract.DemoTable.COLUMN_NAME_LOCATION_LAT,
-                                                    DBContract.DemoTable.COLUMN_NAME_LOCATION_LONG},
-                                                    new int[]{R.id.sql_list_item},
-                                                    0);
-
-        sqlList.setAdapter(mSQLCursorAdapter);
-
-    }*/
-
-
-
-
-
+        ContentValues submitValues = new ContentValues();
+        submitValues.put(DBContract.DemoTable.COLUMN_NAME_LOCATION_LAT, lat);
+        submitValues.put(DBContract.DemoTable.COLUMN_NAME_LOCATION_LONG, lon);
+        submitValues.put(DBContract.DemoTable.COLUMN_NAME_LOCATION_STRING, text);
+        mSQLDB.insert(DBContract.DemoTable.TABLE_NAME, null, submitValues);
+    }
 
 }
 
 
 /*
-[1]: http://droidmentor.com/get-the-current-location-in-android/
-[2]: https://stackoverflow.com/questions/4531396/get-value-of-a-edit-text-field
-
+[1]https://developer.android.com/reference/android/widget/Button.html
+[2]http://classes.engr.oregonstate.edu/eecs/winter2017/cs496/module-7/permissions.html
+[3]http://classes.engr.oregonstate.edu/eecs/winter2017/cs496/module-7/geolocation.html
+[4]http://classes.engr.oregonstate.edu/eecs/winter2017/cs496/module-7/sqlite.html
  */

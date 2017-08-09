@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
+//[1]
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -44,3 +44,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+//references:
+//[1]:http://classes.engr.oregonstate.edu/eecs/winter2017/cs496/module-6/basic-activity.html

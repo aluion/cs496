@@ -31,7 +31,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="Submit"
         android:layout_below="@+id/editText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
